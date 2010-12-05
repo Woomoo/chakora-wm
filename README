@@ -26,22 +26,29 @@ You should have the following before contacting us on this:
 1. CREDITS
 ----------
 
-Chakora is developed by The Chakora Project Development
-Team, a team managed by TechnoDevs.
+As of this release, the chakora-wm development team consists of:
 
-Elijah "starcoder" Perrault   - Head Developer      || iElijah101
-Matthew "MattB" Barksdale     - Co-Head Developer   || mattwb65
-Alexandria "alyx" Wolcott     - Developer           || alyx
-Aaron "Dark_Aaron" Blakely    - Developer       || ablakely
+alyx, Alexandria Wolcott <alyx@woomoo.org>
+JStoker, JStoker <jcs@jcs.me.uk>
+
+The developers of this software acknowledge the contributions of the following
+people:
+
+starcoder, Elijah Perrault <?@?>
+MattB, Matthew Barksdale <?@?>
+Dark_Aaron, Aaron Blakely <?@?>
+sycobuny, Stephen Belcher <sycobuny@malkier.net>
 
 If you are interested in becoming a developer for Chakora,
 please contact a member of the Woomoo Development team
 (irc.woomoo.org #dev ).
 
-Other Credits:
+Concepts based heavily upon the following:
 
-Atheme (http://atheme.net)  - Many design concepts
-Shrike (http://malkier.net) - Some design concepts
+Atheme, http://atheme.net
+Shrike, http://shrike.malkier.net
+cerberus, www unknown
+keldair, http://keldair.woomoo.org
 
 2. DESCRIPTION
 --------------
