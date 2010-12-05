@@ -7,6 +7,7 @@ package Chakora;
 
 use strict;
 use warnings;
+use 5.8.4;
 use Carp qw(carp croak);
 use FindBin qw($Bin);
 use lib("$Bin/../lib");
@@ -23,12 +24,6 @@ use Chakora::Core::SIG;
 our $VERSION = 'chakora-1.0.0+wm';
 
 our $root = "$Bin/..";
-
-# We do not support Windows
-if ( $^O =~ /win/i ) {
-    print("[ERROR] Operating System: Windows is not supported by Chakora.\n");
-    exit;
-}
 
 my (%options);
 our ( $SERVICES_STARTTIME, $SERVICES_VERSION, $DEVS, $pid, $DB_VERSION );
