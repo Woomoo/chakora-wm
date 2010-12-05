@@ -1,36 +1,28 @@
 #!/usr/bin/env perl
-#
-# /  __ \ |         | |
-# | /  \/ |__   __ _| | _____  _ __ __ _
-# | |   | '_ \ / _` | |/ / _ \| '__/ _` |
-# | \__/\ | | | (_| |   < (_) | | | (_| |
-#  \____/_| |_|\__,_|_|\_\___/|_|  \__,_|
-#          Chakora IRC Services
-#
+
 # Copyright (c) 2010 The Chakora Project. All rights reserved.
-# This software is free software; rights to this code are stated in docs/LICENSE.
+# Modifications (c) 2010 Alexandria Wolcott, Woomoo Development team, et al.
+
 package Chakora;
+
 use strict;
 use warnings;
 use Carp qw(carp croak);
 use FindBin qw($Bin);
 use lib("$Bin/../src");
 use IO::Socket;
-use Config::Scoped;
-use File::Data;
+use Config::JSON;
 use Getopt::Long;
 use POSIX qw(setsid strftime);
-use Term::ANSIColor;
 use Sub::Delete;
 use Email::Valid;
 use Class::Unload;
 use Hashlib;
 use Switch;
 
-our $VERSION = 'chakora-1.0.0-dev'
+our $VERSION = 'chakora-1.0.0+wm';
 
-our $ROOT_SRC = "$Bin/../src";
-our $ROOT_ETC = "$Bin/../etc";
+our $root = "$Bin/..";
 
 # We do not support Windows
 if ( $^O =~ /win/i ) {
@@ -62,29 +54,6 @@ $DEVS             = 'starcoder, Matthew, Russell, Niall, Aaron, and alexandria';
 
 printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ))
 
-# Okay! Here we go!
-#print color 'bold red';
-#print("Chakora IRC Services Version 1.0-dev\n");
-#print color 'bold green';
-#print("\n");
-#print("By continuing you are hereby stating that\n");
-#print("you have read and agreed to docs/LICENSE\n");
-#print("\n");
-#print("Many thanks to the developers of Chakora for\n");
-#print("their hard work on this software!\n");
-#print("\n");
-#print("Developers: starcoder, MattB, chazz, Russell, Niall, Dark_Aaron\n");
-#print("\n");
-#print("If you require support, feel free to join our\n");
-#print("official support chatroom!\n");
-#print("\n");
-#print("Host: irc.technoirc.net | Channel: #chakora\n");
-#sleep 2;
-#print("\n\n");
-#print color 'reset';
-#print(  "Chakora IRC Services started on "
-      #. strftime( '%D at %I:%M:%S %p.', localtime )
-      #. "\n" );
 sleep 1;
 $SERVICES_STARTTIME = time();
 our $TAINTED = 0;
@@ -105,7 +74,7 @@ my $conf = Config::Scoped->new( file => $ROOT_ETC . "/chakora.conf", )
   or die("We couldn't open the config file!\n");
 
 # Put them into variables
-our $SETTINGS = $conf->parse;
+$SETTINGS = Config::JSON->new($root.'/etc/chakora.conf');
 
 # Define SIG handlers
 $SIG{'INT'}  = \&INT_handler;
@@ -120,32 +89,32 @@ our (
 # Load the modules
 require Server::Events;
 
-my $protocol = config( 'server', 'ircd' );
+my $protocol = config('uplink/protocol');
 
 switch ($ircd) {
-case 'inspircd12' {
-    print("[MODULES] Loading protocol: InspIRCd 1.2\n");
-    require Protocol::InspIRCd12
-      or error( "chakora", "Protocol module failed to load: $!" );
-}
-case 'inspircd20' {
-    print("[MODULES] Loaded protocol: InspIRCd 2.0\n");
-    require Protocol::InspIRCd20
-      or error( "chakora", "Protocol module failed to load: $!" );
-}
-case 'charybdis' {
-    print("[MODULES] Loading protocol: Charybdis\n");
-    require Protocol::Charybdis
-      or error( "chakora", "Protocol module failed to load: $!" );
-}
-case 'ratbox' {
-    print("[MODULES] Loading protocol: Ratbox\n");
-    require Protocol::Ratbox
-      or error( "chakora", "Protocol module failed to load: $!" );
-}
-case /^.*$/x {
-    error( "chakora", "This protocol isn't supported by Chakora." );
-}
+    case 'inspircd12' {
+        print("[MODULES] Loading protocol: InspIRCd 1.2\n");
+        require Protocol::InspIRCd12
+          or error( "chakora", "Protocol module failed to load: $!" );
+    }
+    case 'inspircd20' {
+        print("[MODULES] Loaded protocol: InspIRCd 2.0\n");
+        require Protocol::InspIRCd20
+          or error( "chakora", "Protocol module failed to load: $!" );
+    }
+    case 'charybdis' {
+        print("[MODULES] Loading protocol: Charybdis\n");
+        require Protocol::Charybdis
+          or error( "chakora", "Protocol module failed to load: $!" );
+    }
+    case 'ratbox' {
+        print("[MODULES] Loading protocol: Ratbox\n");
+        require Protocol::Ratbox
+          or error( "chakora", "Protocol module failed to load: $!" );
+    }
+    case /^.*$/x {
+        error( "chakora", "This protocol isn't supported by Chakora." );
+    }
 }
 require API::Main;
 require API::Server;
@@ -294,7 +263,7 @@ print FILE $pid;
 close FILE;
 
 # Open the socket and connect to the server
-my $socket = IO::Socket::INET->new(
+our $sock = IO::Socket::INET->new(
     Proto     => "tcp",
     LocalAddr => config( 'server', 'vhost' ),
     PeerAddr  => config( 'server', 'host' ),
@@ -606,25 +575,28 @@ while (1) {
     }
 }
 
+sub snd {
+    my ($text) = @_;
+    chomp($text);
+    my $verbose = config('debug/verbose');
+    $verbose ||= 'no';
+    if ($verbose =~ /^(y.*|on|1|t.*)$/i)
+     {
+       print("<< $text\r\n");
+     }
+    send( $sock, $text . "\r\n", 0 );
+    return $text;
+}
+
 sub send_sock {
-    my ($str) = @_;
-    chomp($str);
-    send( $socket, $str . "\r\n", 0 );
-    if ($IN_DEBUG) {
-        print( "[YOU] " . $str . "\n" );
-    }
+    __PACKAGE__::snd(@_);
+    # Included to maintain API compatability with Chakora main
 }
 
 sub config {
-    my ( $block, $name ) = @_;
-    $block = lc($block);
-    $name  = lc($name);
-    if ( defined $SETTINGS->{$block}->{$name} ) {
-        return $SETTINGS->{$block}->{$name};
-    }
-    else {
-        return 0;
-    }
+    my ($value) = @_;
+    my $setting = $SETTINGS->get($value);
+    return $setting;
 }
 
 sub error {

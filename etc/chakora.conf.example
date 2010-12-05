@@ -1,159 +1,86 @@
-# Chakora configuration file
-#
-# Copyright (c) 2010 The Chakora Project. All rights reserved.
-# This software is free software; rights to this config are stated in docs/LICENSE.
+# config-file-type: JSON 1
+{
+    'chakora' : {
+        'host' : 'chakora.int',
+        'name' : 'Chakora IRC Services',
+        'sid' : '00A',
+        'admin' : 'misconfigured admin',
+        'email' : 'misconfigured@admin,tld',
+        'vhost' : '0.0.0.0'
+    },
 
-# Me block is information on this Chakora instance
-me {
-    # Server name
-    name = services.server.tld
-    # Information on the server
-    info = "Chakora IRC Services"
-    # A unique 3 character ID
-    sid = 34R
+    'uplink' : {
+        'protocol' : 'inspircd12',
+        'host' : 'localhost.localdomain',
+        'port' : 7000,
+        'password' : 'linkage'
+    },
+
+    'network' : {
+        'name' : 'misconfiguredNET',
+    },
+
+    'logging' : {
+        'channel' : '#services',
+        'flags' : 'error soper request register'
+    },
+
+    'general' : {
+        'changets' : 1,
+        'fantasy' : 1,
+        'allow_taint' : 0,
+    },
+
+    'crypto' : {
+        'method' : 'skein',
+        'size' : 1024,
+        #'key' : 'misconfigured'
+    },
+
+    'services' : {
+        'chanserv' : {
+            'nick' : 'ChanServ',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Channel Services',
+            'fantasy' : '!'
+        },
+
+        'nickserv' : {
+            'nick' : 'NickServ',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Nickname Services',
+
+            'spam' : 0
+        },
+
+        'operserv' : {
+            'nick' : 'OperServ',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Operator Services'
+        },
+
+        'hostserv' : {
+            'nick' : 'HostServ',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Host Management Services'
+        },
+
+        'memoserv' : {
+            'nick' : 'MemoServ',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Memo Services'
+        },
+
+        'global' : {
+            'nick' : 'Global',
+            'user' : 'services',
+            'host' : 'services.int',
+            'real' : 'Global Noticer'
+        }
+    }
 }
-
-# The server block is information about the ircd and linking
-server {
-    # inspircd12, charybdis, or ratbox
-    ircd = inspircd12
-    # The name/ip of our hub
-    host = some.server.tld
-    # IP to bind to, 0.0.0.0 should usually be fine
-    vhost = 0.0.0.0
-    # Port to link on
-    port = 7000
-    # Linking password
-    password = linkage
-}
-
-# The network block is information about the network chakora is linking to
-network {
-    # Network name
-    name = "technoirc"
-    # Network admin
-    admin = "starcoder"
-}
-
-# The log block is information about where/what to log
-log {
-
-
-    # Logging flags:
-    #   debug - Log all debug
-    #   commands - Log all command usuage
-    #   error - Log critical errors
-    #   set - Log all SET commands for an user/channel
-    #   register - Log all registrations
-    #   soper - Log all service oper usuage
-    #   request - Logs anything thats requested (mainly vHosts)
-
-    # Log channel.
-    logchan = "#services"
-    # Log channel flags.
-    logchanf = "error soper request register"
-}
-
-# The services block is information for operator of services
-services {
-    # Administrator email
-    email = 'admin@email.me'
-    # If you want to allow tainting, set this to 1, but you will lose your support
-    allow_taint = 0
-    # Change a channel's TS to the TS from when it was registered (recommended)
-    updatets = 1
-    # Allow the use of fantasy - not using fantasy saves some resources.
-    use_fantasy = 1
-}
-
-# The enc block is information on database encryption
-enc {
-    # Encryption method.
-    #   none - No encryption. Users will be warned of this.
-    #   adler32 -   Adler32 hash algorithm
-    #   blake   -   BLAKE hash algorithm    -   http://131002.net/blake/
-    #   bmw     -   Blue Midnight Wish hash algorithm
-    #   cubehash  - CubeHash hash algorithm -   http://cubehash.cr.yp.to/
-    #   echo    -   ECHO hash algorithm     -   http://crypto.rd.francetelecom.com/echo/
-    #   edonr   -   Edon-R hash algorithm   -   http://www.item.ntnu.no/people/personalpages/fac/danilog/edon-r
-    #   fugue   -   Fugue hash algorithm    -   http://domino.research.ibm.com/comm/research_projects.nsf/pages/fugue.index.html
-    #   gost    -   GOST hash algorithm     -   http://en.wikipedia.org/wiki/GOST_%28hash_function%29
-    #   groestl -   Groestl hash algorithm  -   http://www.groestl.info/
-    #   hamsi   -   Hamsi hash algorithm    -   http://homes.esat.kuleuven.be/~okucuk/hamsi/
-    #   jh      -   JH hash algorithm       -   http://icsd.i2r.a-star.edu.sg/staff/hongjun/jh/
-    #   keccak  -   Keccak hash algorithm   -   http://keccak.noekeon.org/
-    #   luffa   -   Luffa hash algorithm    -   http://www.sdl.hitachi.co.jp/crypto/luffa/
-    #   sha2    -   SHA hash algorithm
-    #   shabal  -   Shabal hash algorithm   -   http://www.shabal.com/
-    #   shavite -   SHAvite-3 hash algorithm    -   http://www.cs.technion.ac.il/~orrd/SHAvite-3/
-    #   simd    -   SIMD hash algorithm     -   http://www.di.ens.fr/~leurent/simd.html
-    #   skein   -   Skein hash algorithm    -   http://www.schneier.com/skein.html
-    #   whirlpool   -   Whirlpool hash algorithm    -   http://paginas.terra.com.br/informatica/paulobarreto/WhirlpoolPage.html
-    method = "skein"
-    size = 512 # The bitsize of the hash, this is generally either 128, 256, 384, or 512
-        # Whirlpool, Adler32, and GOST do not use the size value, but have preset sizes.
-    key = "key" # This is the key for usage if your specified encryption
-                # module is a cipher, or HMAC. Use of a cipher is
-                # HIGHLY unrecommended.
-}
-
-# Information on services
-
-chanserv {
-    nick = ChanServ
-    user = ChanServ
-    host = technoirc/Services/ChanServ
-    real = "Channel Services"
-    # Character for fantasy commands. e.g. ! . @
-    fantasy_char = !
-}
-
-nickserv {
-    nick = NickServ
-    user = NickServ
-    host = technoirc/Services/NickServ
-    real = "Nickname Services"
-    enforce_delay = 30
-    # The maxiumum number of times an email address can be used to register an account
-    max_email = 3
-    # Send a verication email upon registration?
-    verify_email = 0
-}
-
-operserv {
-    nick = OperServ
-    user = OperServ
-    host = technoirc/Services/OperServ
-    real = "Oper Services"
-}
-
-hostserv {
-    nick = HostServ
-    user = HostServ
-    host = technoirc/Services/HostServ
-    real = "vHost Services"
-}
-
-memoserv {
-    nick = MemoServ
-    user = MemoServ
-    host = technoirc/Services/MemoServ
-    real = "Memo Services"
-}
-
-global {
-    nick = Global
-    user = Global
-    host = technoirc/Services/Global
-    real = "Global Noticer"
-}
-
-xop {
-    qop = "+QOqaohvLkMtisC"
-    sop = "+AOaohvLkMtis"
-    aop = "+OohvLkMti
-    hop = "+HhvLkMti"
-    vop = "+VvL"
-}
-
-# End configuration file
