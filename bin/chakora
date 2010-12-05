@@ -9,16 +9,16 @@ use strict;
 use warnings;
 use Carp qw(carp croak);
 use FindBin qw($Bin);
-use lib("$Bin/../src");
+use lib("$Bin/../lib");
 use IO::Socket;
 use Config::JSON;
 use Getopt::Long;
 use POSIX qw(setsid strftime);
 use Sub::Delete;
-use Email::Valid;
 use Class::Unload;
 use Hashlib;
 use Switch;
+use Chakora::Core::SIG;
 
 our $VERSION = 'chakora-1.0.0+wm';
 
@@ -49,13 +49,11 @@ if ( $options{help} ) {
 }
 
 # Define our version
-$SERVICES_VERSION = 'Chakora 1.0-dev';
 $DEVS             = 'starcoder, Matthew, Russell, Niall, Aaron, and alexandria';
 
 printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ))
 
 sleep 1;
-$SERVICES_STARTTIME = time();
 our $TAINTED = 0;
 svsflog( "chakora", "Chakora IRC Services started." );
 
@@ -69,16 +67,12 @@ if ( $options{debug} ) {
     $IN_DEBUG = 1;
 }
 
-# Get configuration values
-my $conf = Config::Scoped->new( file => $ROOT_ETC . "/chakora.conf", )
-  or die("We couldn't open the config file!\n");
-
 # Put them into variables
 $SETTINGS = Config::JSON->new($root.'/etc/chakora.conf');
 
 # Define SIG handlers
-$SIG{'INT'}  = \&INT_handler;
-$SIG{'TERM'} = \&TERM_handler;
+$SIG{'INT'}  = \&Chakora::Core::SIG::INT_handler;
+$SIG{'TERM'} = \&Chakora::Core::SIG::TERM_handler;
 
 # Create some variables for later use
 our (
@@ -91,23 +85,18 @@ require Server::Events;
 
 my $protocol = config('uplink/protocol');
 
-switch ($ircd) {
-    case 'inspircd12' {
+switch ($protocol) {
+    case /^insp/i {
         print("[MODULES] Loading protocol: InspIRCd 1.2\n");
         require Protocol::InspIRCd12
           or error( "chakora", "Protocol module failed to load: $!" );
     }
-    case 'inspircd20' {
-        print("[MODULES] Loaded protocol: InspIRCd 2.0\n");
-        require Protocol::InspIRCd20
-          or error( "chakora", "Protocol module failed to load: $!" );
-    }
-    case 'charybdis' {
+    case /charybdis/i {
         print("[MODULES] Loading protocol: Charybdis\n");
         require Protocol::Charybdis
           or error( "chakora", "Protocol module failed to load: $!" );
     }
-    case 'ratbox' {
+    case /ratbox/i {
         print("[MODULES] Loading protocol: Ratbox\n");
         require Protocol::Ratbox
           or error( "chakora", "Protocol module failed to load: $!" );
@@ -629,8 +618,8 @@ sub svsflog {
 
 sub module_load {
     my ($module) = @_;
-    if ( -e $ROOT_SRC . "/../modules/" . lc($module) . ".pm" ) {
-        do $ROOT_SRC . "/../modules/" . lc($module) . ".pm" and return 1
+    if ( -e $root . "/modules/" . lc($module) . ".pm" ) {
+        do $root . "/modules/" . lc($module) . ".pm" and return 1
           or return 0;
     }
     else {
@@ -640,12 +629,9 @@ sub module_load {
 
 sub count {
     my (@array) = @_;
-    my ( $i, $ai );
-    foreach $ai (@array) {
-        $i += 1;
-    }
-    if ( !defined $i ) {
-        $i = 0;
+    my $i = 0;
+    foreach my $ai (@array) {
+        $i++;
     }
     return $i;
 }
@@ -777,8 +763,8 @@ sub dbflush {
 }
 
 sub idflush {
-    if ( -e "$ROOT_SRC/../etc/idrecover.db" ) {
-        `rm $ROOT_SRC/../etc/idrecover.db`;
+    if ( -e $root."/etc/idrecover.db" ) {
+        `rm $root/../etc/idrecover.db`;
     }
 
     my ($idd);
@@ -802,29 +788,4 @@ sub idflush {
         print FILE $idd;
         close FILE;
     }
-}
-
-sub TERM_handler {
-    logchan( "operserv", "\002!!!\002 Caught \002SIGTERM\002; terminating" );
-    svsflog( "chakora", "Exiting on SIGTERM" );
-    if ( module_exists("chanserv/main") ) {
-        serv_quit( "chanserv", "Shutting down" );
-    }
-    serv_squit( config( 'me', 'sid' ), "Caught SIGTERM" );
-    dbflush();
-    sleep 1;
-    exit(0);
-}
-
-sub INT_handler {
-    logchan( "operserv", "\002!!!\002 Caught \002SIGINT\002; terminating" );
-    svsflog( "chakora", "Exiting on SIGINT" );
-    if ( module_exists("chanserv/main") ) {
-        serv_quit( "chanserv", "Shutting down" );
-    }
-    serv_squit( config( 'me', 'sid' ), "Caught SIGINT" );
-    dbflush();
-    if ($IN_DEBUG) { idflush(); }
-    sleep 1;
-    exit(0);
 }
