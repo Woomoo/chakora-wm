@@ -6,19 +6,36 @@
 package Chakora;
 
 use strict;
+# Verbose warnings
 use warnings;
-use 5.8.4;
+use 5.8.0;
+# Better errors than die() and warn()
 use Carp qw(carp croak);
+# Find the actual dir of this file.
 use FindBin qw($Bin);
+# Find the location for included libs.
 use lib("$Bin/../lib");
+# TCP/UNIX socket management
 use IO::Socket;
+# Mostly human-readable JSON config format parser
 use Config::JSON;
 use Getopt::Long;
-use POSIX qw(setsid strftime);
+# POSIX features
+use POSIX qw(setsid nice BUFSIZ setsid strftime);
+# Extended Input/Output 'file' handle support
+use IO::Handle;
+# System select() event interface
+use IO::Select;
+# What is this used for...
 use Sub::Delete;
+# See above message. I'm guessing it's time for a major rework
+# of unloading modules.
 use Class::Unload;
+# Used to generate hashed passwords
 use Hashlib;
+# switch/case functionality
 use Switch;
+# SIG handlers.
 use Chakora::Core::SIG;
 
 our $VERSION = 'chakora-1.0.0+wm';
