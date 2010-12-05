@@ -1,0 +1,185 @@
+/  __ \ |         | |
+| /  \/ |__   __ _| | _____  _ __ __ _
+| |   | '_ \ / _` | |/ / _ \| '__/ _` |
+| \__/\ | | | (_| |   < (_) | | | (_| |
+ \____/_| |_|\__,_|_|\_\___/|_|  \__,_|
+
+                 CHANGELOG
+---------------------------------------
+
+Current Devel
+	- API: Added event_ms_sent to allow hooks when a user sends a memo
+	- Modules/Config: Added use_fantasy, allowing you to not allow the use of fantasy, which could potentially save resources
+	- Modules: If use_fantasy is set to false, set +d (deaf) on services, if it's available
+	- Protocols: InspIRCd: If m_deaf is loaded/unloaded... un(set) the mode on services
+	- Modules: Added operserv/stats
+	- Protocols: Handle remote servers trying to set an users accountname
+	- Protocols: Added ircd-ratbox support
+	- Modules: Added nickserv/resetpass
+    - Modules: Added chanserv/flags
+
+1.0.0-alpha3
+	- API: Added idflush() for flushing data about identified users to disk.
+	- Chakora: Use idflush() if a SIGINT is caught while in debug mode.
+	- Modules: Added nickserv/ghost.
+	- Contrib - russellb28: Added chanserv/speak which allows the use of 'say' and 'act'
+	- Contrib - russellb28: Added operserv/dns which allows operators to lookup A/MX/NS DNS Records
+	- Contrib - russellb28: Added operserv/kill which be used as an alternate to the ircd's built in /kill
+	- Modules: added chanserv/mode
+	- Protocol - Charybdis: Added handling for MLOCK
+	- API: added serv_global when a particular service need to send a global, send_global should be used for network announcements
+	- Modules: added chanserv/kick
+	- Modules: added chanserv/ban
+	- Modules: added chanserv/kickban
+	- Protocols: Basic InspIRCd2.0 Protocol Added
+	- Protocols: PROTO_SETTINGS{god} added to all IRCd's, it should be used by any module that creates a service (if available) as such.
+	- Protocols: Re-create OperServ if killed.
+	- Chakora: Added $Chakora::LINKD which is the SID of the server we are linked to.
+	- Protocol - InspIRCd(12|20): Added tracking for module load/unloads.
+	- Chakora: Deleted $Chakora::LINKD as sidInfo provides this data.
+	- Modules: Added operserv/modreload for reloading modules.
+	- Protocols: If a server splits, delete all servers that it acts hub to, along with their users.
+	- API: Added event_chgident() and event_chghost()
+	- operserv/modunload: Unload all modules of that service if the main module is unloaded.
+	- API: Added fantasy() for enabling fantasy on a ChanServ command.
+	- Protocols: Added serv_netban() for setting network bans.
+
+1.0.0-alpha2
+	- HostServ: Update hostserv/main to match the updated API.
+	- Config/Modules: nickserv/register now allows you to set a maximum number of accounts an email can be associated with and enforces it.
+	- Modules: Finished nickserv/drop
+	- Chakora: Made soper.conf for services oper powers.
+	- Modules: nickserv/info: Added support to provide last real host to sopers with nickserv:fullinfo
+	- Modules: Added chanserv/mute
+	- Modules: Added chanserv/clear
+	- Modules: Added operserv/raw
+	- Chakora: Class::Unload is now a dependency.
+	- API: Module init handlers can now return 0 for an unsuccessful loading.
+	- HostServ: Added hostserv/help and hostserv/assign (with UNASSIGN).
+	- API: Moved services-related subs to src/API/Services.pm.
+	- Modules: Added operserv/restart for performing a more clean services restart.
+	- NickServ: Re-identify users when possible after restarting.
+	- Protocols: Update the accountname in memory when changing the accountname on the IRCd.
+	- Protocols: Delete a user's data from memory when KILLed by services.
+	- Protocols: Delete a server's data as well as the data of it's users when SQUIT'd by services.
+	- Protocols: When JUPE'ing a server, delete the data of it's users from memory.
+
+1.0.0-alpha1
+	- InspIRCd: Join after the ircd is done bursting to us
+	- InspIRCd: Store TS
+	- InspIRCd: Use FJOIN properly
+	- All: Fixed a few possible small memory leaks
+	- Protocols: Added serv_cmode, for a regular MODE command
+	- InspIRCd: m_servprotect is no longer required
+	- Module API: Store module author and version for module listing
+	- API: Added ctcp_reply
+	- Setup: We no longer provide a config generator, we now provide an example config for you to edit
+	- InspIRCd/Charybdis: Properly handle whether or not a user is an oper. 
+	- Module API: added event_deoper and event_oper (meaning you can add hooks for them)
+	- Contrib - mattwb65: Updated os_userlog to handle opers and deopers
+	- InspIRCd/Charybdis: Track linked servers
+	- Module API: added sidInfo
+	- Module API: added event_sid and event_netsplit (meaning you can add hooks for them)
+	- Contrib - mattwb65: Updated os_userlog to log server introductions and splits
+	- InspIRCd/Charybdis: Track users away status
+	- Module API: added event_away and event_back (meaning you can add hooks for them)
+	- Contrib - mattwb65: Updated os_userlog to log when a user goes away and returns
+	- Module API: event_uid now includes the server a user is connecting from
+	- Contrib - mattwb65: Updated os_userlog to log what server a user is quitting/connecting from
+	- API: Added is_soper
+	- Modules: Added operserv/shutdown and operserv/global
+	- API: added module_load
+	- Modules: Added operserv/modlist and operserv/modload
+	- Contrib - mattwb65: Added testing operserv/modunload
+	- API fix: Fixed a bug in module_void
+	- Contrib - mattwb65: Added chanserv/lol (for an example command) and chanserv/away (for an example hook module) 
+	- Docs: Added API docs
+	- Core: We no longer censor register
+	- Core: Formatted the time chakora was started in the "Chakora was started" message
+	- Chakora: Unbreak - lib files were misplaced
+	- Core: Added SIGINT handling
+	- Modules: Made operserv/shutdown log to the logfile
+	- API: Added is_registered
+	- Modules: nickserv/register now writes to the db and checks if the nickname is already registered
+	- Core: killed src/Chakora/Protocol and src/Chakora/Server.
+	- API: Changed the way of sending data in services. Use full services names such as 'chanserv' instead of 'cs'.
+	- Modules: Fixed official modules to follow the rules of the updated API.
+	- API: Added serv_squit()
+	- Modules: Fixed nickserv/register to follow the rules of the updated API and disabled email checker until it is fixed.
+	- Core: Updated the config to look nicer.
+	- Core: Deleted the ID's in databases
+	- API: You can now create custom services clients with serv_add()
+	- Core/Modules: HostServ and MemoServ are no longer default services.
+	- Modules: protocol/inspircd and protocol/charybdis are now version 0.8.
+	- Core/Modules/Protocols: Fixed several bugs in the updated API.
+	- Modules: Added hostserv/main.
+	- Events: Added event_eos for when we finish syncing.
+	- Protocols: Fixed a bug where, after 10 services clients, services would break.
+	- Contrib - mattwb65: os_userlog now allows you to choose between OperServ or a custom service logging
+	- Protocols: Added serv_sethost
+	- Protocols - InspIRCd: check for m_chghost
+	- Modules: Fixed a bug in hostserv/main where, it wouldn't create HostServ if we're already synced.
+	- API: Added serv_del() for deleting services clients.
+	- API: Made Chakora more modular by moving API stuff to separate modules located in src/API.
+	- API: Added create_cmdtree() and delete_cmdtree() for enabling commands on only services clients we want to have commands.
+	- Protocols: Added nick tracking for services on InspIRCd and half-way on Charybdis.
+	- API: Added event_pds for executing hooks during syncing.
+	- Chakora: Added ./man in bin/ for viewing the Chakora API Manual.
+	- Chakora: Created a new flatfile database format for storing data in a different way than before.
+	- API: Added is_identified
+	- API: Added serv_enforce
+	- Modules: Added nickserv/identify and nickserv/info
+	- API: added metadata
+	- API: added event_identify and event_register
+	- XMLRPC: Scrapped XMLRPC, most likely permanently, due to it not working nor will we ever be able to create it at this time.
+	- Core: we now need Email::Valid for Chakora
+	- Modules: nickserv/register now checks for a valid email address
+	- Modules: added nickserv/logout
+	- API: added event_logout
+	- Modules: use event_identify and event_register in their modules
+	- Modules: added nickserv/set
+	- Config: Added register, identify, info, logout, and set nickserv modules to default autoload, along with the config options to go with them
+	- API: Renamed event_register to event_ns_register
+	- API: Added event_cs_register
+	- Protocols: Fixed bugs and added isonchan() for checking whether a user is on a channel or not.
+	- Core: Check for m_muteban in InspIRCd
+	- Modules: nickserv/info - Added "<nick> is a Services Operator." if they are identified to an account with soper privs
+	- Chakora: Use POSIX::RT::Timer.
+	- API: Added flaglist_add flaglist_del and flag_exists
+	- Chakora: Added chanserv/register and full status sync subs, channel and user member of channel trackers and bug fixes.
+	- API: Added event_kick and event_topic
+	- Protocols: Track KICK and TOPIC
+	- API: Added create_core_flags
+	- Modules: added chanserv/info and chanserv/flist
+	- Modules: (chanserv|nickserv|operserv)/help: Improved how help is displayed.
+	- API: Added is_tainted
+	- Modules: Made ChanServ modular with chanserv/main. All ChanServ modules will load this if it's not loaded as it is dependent on ChanServ.
+          You should add chanserv/main to autoload before any ChanServ modules regardless.
+	- Chakora: updateTS is now a config option. WE HIGHLY ENCOURAGE ENABLING IT.
+	- API: added has_flag
+	- Modules: Added chanserv/sync
+	- API: added ison
+	- Modules: Added chanserv/invite
+	- Protocols: InspIRCd renamed to InspIRCd12, support for InspIRCd20 will be added soon.
+	- API: added event_stopic for topic bursts
+	- Protocols: Added raw_motd and raw_admin
+	- Modules: Added chanserv/op, chanserv/voice, chanserv/protect, chanserv/halfop, and chanserv/owner
+	- API: added flag +L for viewing channel access list
+	- API: added in_group
+	- Modules: Added to nickserv/set: set accountname and nostatus
+	- API: extended is_register to channels
+	- Modules: added memoserv/main
+	- Modules: added chanserv/set
+	- Modules: Added to nickset/set: set noexpire
+	- API: added account_name to get an account name via a grouped nick
+	- Modules: Added to chanserv/set: set noexpire
+	- Protocols: when we track topics, if the channel is registered, set metadata to track the topic
+	- Modules: Added to chanserv/main: TOPICLOCK enforcement
+	- Modules: Added nickserv/main
+	- Modules: Added global/main
+	- Chakora: Added support to the database format for MemoServ memos.
+	- Modules: memoserv/main: Added memo_send() and memo_del()
+	- API: added gen_sid
+	- Chakora: Module autoload moved to modules.conf with a new format. Example config: modules.conf.example
+	- Protocols: Mode trackers
+	- API: added event_ctcp 

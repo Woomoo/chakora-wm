@@ -1,0 +1,186 @@
+/  __ \ |         | |
+| /  \/ |__   __ _| | _____  _ __ __ _
+| |   | '_ \ / _` | |/ / _ \| '__/ _` |
+| \__/\ | | | (_| |   < (_) | | | (_| |
+ \____/_| |_|\__,_|_|\_\___/|_|  \__,_|
+
+                 TODO
+----------------------------------------
+
+[X] Global
+    [X] send_global sub (Use a foreach statement for %uid's to send a NOTICE to each user? --Matthew)
+            # Why the fuck? You'd only need to do an icky hack like that in ircd-hybrid, and then not even that bad.
+            # Just send it to $* or something like that. --alyx
+[ ] NickServ
+    [X] Make the nickserv core a module.
+        [O] Add sub's relating to nickserv into nickserv/main (These go in API/Services.pm)
+    [X] Register
+        [X] Check for valid a valid email address
+        [X] Set default nickserv flags
+        [X] Set a limit to the number of accounts an email address can have
+    [ ] Group
+            # This also should wait until we rework the database API --alyx
+    [X] Identify
+    [X] Drop
+    [!] Enforce (We still need a timer...)
+            # Use Keldair::Core::Timer? --alyx
+    [!] Set
+        [X] Set email, password, hidemail, enforce, noexpire, nostatus
+        [ ] Set API # Wtf would this even do? --alyx
+    [X] Ghost
+    [ ] Release
+    [ ] Verify (allow opers with nickserv:override to force verification --Matthew)
+    [X] Account name
+    [X] Logout
+    [X] Once the CHGIDENT/CHGHOST event is done, add a hook in nickserv/main to change the data:realhost
+        # But... if it's a CHGHOST, it's *not* the real host... --alyx
+    [X] Make commands involving changing a password aware of the current encryption method
+        # Someone needs to learn how to use a spellchecker, s/envolving/involving/ --alyx
+        # Three cheers for Hashlib! --alyx
+
+[ ] ChanServ
+    [X] Make the chanserv core a module
+    [X] Register
+    [ ] Drop
+    [ ] Finish sync
+    [ ] AKick
+    [!] Finish CLEAR (We need to track bans in order to clear bans)
+        [ ] Add CLEAR mutes
+        [ ] Add CLEAR sop, aop, hop, vop
+    [!] Owner/Protect/Op/Halfop/Voice
+        [ ] Fix the help entries to be formatted perfectly.
+    [!] Set (Founder, Successor, Restricted, Topiclock, Guard)
+        [ ] Founder
+        [ ] Successor
+        [X] Topiclock
+        [X] Guard
+        [X] Restricted
+        [X] Nostatus
+        [X] Fantasy
+        [X] Description
+        [X] URL
+        [X] Noexpire
+    [!] Access list system (We're going to do a flag system with an XOP adapter)
+[ ] MemoServ
+    [X] Make the memoserv core a module
+    [ ] Send
+    [ ] List
+    [ ] Read
+    [ ] Forward
+    [ ] Delete
+                # Just a comment, obviously, anyone touching MemoServ's rubbish before we rework
+                # the database API is a dead (wo)man. --alyx
+[ ] OperServ
+    [O] Make the operserv core a module
+    [X] Don't allow OperServ to be kicked/killed/etc. (Add the reconnection stuff in raw_ subs? --Matthew)
+                # Wouldn't it be better to do this for EVERY pseudoclient? --alyx
+    [X] Restart
+    [X] Shutdown
+    [ ] Rehash (Config::Scoped doesn't allow this, we need our own config parser --Matthew)
+                # Use Config::JSON then, silly! --alyx
+    [X] Module management (list, load, unload) [list done, somethings wrong with load and unload - perhaps module_exists is bugged --Matthew]
+    [ ] Make modload, modunload and protocols - unloadable ( protocols don't have a void/init handler, regardless, let it be known it's not unloadable --Matthew)
+    [ ] Improve the error messages in modload, if the file doesn't exist say that.
+    [X] The protocols need to be a module (Add $Chakora::MODULE{name} $Chakora::MODULE{author} and $Chakora::MODULE{version} to the top of the protocol --Matthew)
+    [ ] AKill
+    [ ] Jupe
+    [X] Global
+    [X] Uptime
+    [X] Version
+    [ ] Logonnews (Add a hook using hook_uid_add, sending a( ) notice(s) to users on connect? --Matthew)
+    [ ] Privs (Allows a soper to view the privs he/she has access to)
+[ ] HostServ
+    [X] Make the hostserv core a module
+    [X] Set vHosts
+    [X] Delete vHost
+    [ ] Group
+    [ ] Request # Yet another thing to wait for the database API change for. --alyx
+    [?] On/Off
+[ ] Core
+    [X] Add module_void
+    [X] Add ctcp_reply
+    [O] Add module_is_loadable (check if the file exists perhaps?)
+            # What is the point of this? Just eval all module loading and return 0 if it fails. (See also: Keldair) --alyx
+    [X] Improve CTCP handling (make add_ctcp_handler and del_ctcp_handler perhaps?) - Made it an event
+    [O] Add is_oper
+            # Oh, this explains why I couldn't find this sub anywhere. --alyx
+    [~] Make Chakora's DB backend modular.
+            # This is impossible to do without completely redesigning how Chakora handles database reading/writing.
+            # May I suggest doing a database API, and using OpenSEX? --alyx
+    [~] Add MySQL support.
+            # See modular DB issue. --alyx
+    [~] Add PostgreSQL support.
+            # See modular DB issue. --alyx
+[ ] Protocols
+    [X] InspIRCd: Track CHGIDENT and make an event for it
+    [X] Network ban API sub
+    [ ] Track bans/mutes
+    [X] Add serv_kill
+    [X] Add serv_enforce
+    [ ] Add function to hold nicknames
+            # Difference between this and serv_enforce is what? --alyx
+    [X] InspIRCd: find a way to properly tell if a user is an oper
+    [X] Charybdis: find a way to properly tell if a user is an oper
+    [X] Add serv_jupe (InspIRCd's module still lacks this, developers who can create some sort of SID generator and check if its in use, go for it --Matthew)
+    [X] InspIRCd: strip modes on a user in FJOIN (I was stupid, it already did that --Matthew)
+    [X] Charybdis: Oper regex needs fixed (for one +a isn't always applied, also +o isn't the only mode, so the current one won't work --Matthew)
+            # I'd do it, if I could find where the bloody regex is. Regex should be (o|l|a), btw. --alyx
+    [X] InspIRCd: Add raw_motd and raw_admin
+    [X] Add serv_accoutname
+    [X] Make a SID generator
+    [ ] Make the UID generator use letters instead of numbers.
+    [ ] Native ShadowIRCd support.
+    [X] Native ircd-ratbox support.
+    [+] ircd-hybrid support.
+        # Hi yes, geniuses, you cannot have full services support on vanilla ircd-hybrid. --alyx
+    [+] UnrealIRCd support.
+    [+] ircu support.
+    [+] Bahamut support.
+    [+] ircd-plexus support.
+    [ ] TS6-generic support.
+    [+] P10-generic support.
+    [ ] A server doesn't need to exist to add a jupe, but we still need to check if a server that is trying to be juped exists. Fix the $ssid in the protocols to do this.
+    [X] InspIRCd: Handle remote servers trying to set a users accountname like Charybdis
+    [ ] Add handling for ADDLINE (InspIRCd) and BAN (Charybdis)
+    [ ] When a service is unloaded, unload all modules that are associated with it
+
+[ ] Docs
+    [X] Add docs for the module api
+    [!] Improve module api docs (add sidInfo and uidInfo for one)
+    [!] Finish technical documentation.
+        [ ] Protocol documentation
+            [ ] TS6 documantation
+                [ ] TS6 extensions documentation
+            [ ] TS5 documentation
+            [ ] P10 documentation
+            [ ] Unreal documentation
+            [ ] InspIRCd documentation
+            [ ] Bahahmut documentation ( I think )
+        [ ] Documentation of other technologies used.
+            [ ] Hashlib documentation
+    # Yes, I do wish to have documentation of all protocol nonsense we support. --alyx
+
+[ ] Other
+    [X] Allow custom services to be made and handled like others
+    [ ] When chanserv/flags is done, add the +L flag creation there
+            # +L? --alyx
+    [ ] Make our own config parser, we really need one.
+            # Why? Config::JSON would work rather perfectly for this. I could quickly make one, if really needed though. --alyx
+    [!] Fix the truckload of uninitialized values issues that are displayed while in debug mode.
+            # This made me chuckle. <3 --alyx
+
+[ ] Unapproved concepts
+    [ ] SASL support (Perhaps an SaslServ?)
+    [ ] CertFP support
+    [ ] Challenge-based authentication (Is this possible? Who knows!?)
+    [ ] Ratelimit turning on and off a vhost.
+    [ ] Specify the svs in subroutines like send_global
+
+Key:
+    X = Done
+    ! = In development
+    ? = Still being questioned whether it should be in Chakora or not
+    O = This didn't make the cut, this could be added later though
+    + = This has been planned for Chakora v2.x series.
+    > = This has been planned for Chakora v1.1.
+    ~ = Currently impossible to do.

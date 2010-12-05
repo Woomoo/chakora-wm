@@ -1,0 +1,30 @@
+# Chakora example services oper configuration file
+#
+# Copyright (c) 2010 The Chakora Project. All rights reserved.
+# This software is free software; rights to this config are stated in docs/LICENSE.
+
+BOF oper
+operserv:_
+operserv:global
+nickserv:fullinfo
+nickserv:manage
+EOF
+
+BOF admin
+chanserv:override
+nickserv:override
+hostserv:override
+operserv:override
+operserv:update
+INCLUDE oper
+EOF
+
+BOF sra
+operserv:mod_
+operserv:svs:run
+#operserv:raw
+INCLUDE admin
+EOF
+
+SOPER starcoder sra
+SOPER MattB sra
