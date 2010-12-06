@@ -60,9 +60,6 @@ if ( $options{help} ) {
     exit;
 }
 
-# Define our version
-$DEVS             = 'starcoder, Matthew, Russell, Niall, Aaron, and alexandria';
-
 printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ))
 
 sleep 1;
@@ -122,9 +119,9 @@ require API::Server;
 require API::Services;
 
 # Void support if ALLOW_TAINT is enabled
-if ( config( 'services', 'allow_taint' ) ) {
+if ( config('general/allow_taint') ) {
     print(
-"[WARNING] ALLOW_TAINT is enabled, your rights to support are hereby voided.\n"
+"[Warning] By using tainted modules or settings, you will probably break something.\n"
     );
 }
 
@@ -246,19 +243,17 @@ unless ( $options{debug} ) {
       or error( "chakora", "Can't write to /dev/null: $!" );
     open STDERR, '>>/dev/null'
       or error( "chakora", "Can't write to /dev/null: $!" );
-    $pid = fork();
-    unless ( $pid == 0 ) {
+  defined($pid = fork()) or
         svsflog( "chakora",
-            "Successfully forked into the background. Process ID: " . $pid );
-        exit;
-    }
-    setsid or error( "chakora", "Can't start a new session: $!" );
+            "Successfully forked into the background. Process ID: " . $pid )
+            and exit;
+    setsid() or error( "chakora", "Can't start a new session: $!" );
 }
 else {
     $pid = $$;
 }
 
-open FILE, ">$ROOT_SRC/../etc/chakora.pid"
+open FILE, ">$rootetc/chakora.pid"
   or error("Unable to open PID file: $!");
 print FILE $pid;
 close FILE;
