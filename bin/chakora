@@ -30,7 +30,6 @@ use IO::Select;
 use Sub::Delete;
 # See above message. I'm guessing it's time for a major rework
 # of unloading modules.
-use Class::Unload;
 # Used to generate hashed passwords
 use Hashlib;
 # switch/case functionality
