@@ -20,4 +20,5 @@
         "oper" : {
             "opersvs" : [ 'global', 'update' ],
             "nicksvs" : [ 'manage' ]
-        },
+        }
+}
