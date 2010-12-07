@@ -15,7 +15,7 @@ load "chanserv/invite";          # INVITE: Allows one to invite (him/her)self or
 load "chanserv/kick";            # KICK: Allows one to kick a user on a channel using ChanServ. (flag +k)
 load "chanserv/kickban";         # KICKBAN: Allows one to kick and ban a user on a channel using ChanServ. (flag +k)
 load "chanserv/mode";            # MODE: Allows one to set modes on a channel using ChanServ. (flag +c)
-load "chanserv/mute";            # MUTE: Allows one to mute (him/her)self or another user. (flag +M) 
+load "chanserv/mute";            # MUTE: Allows one to mute (him/her)self or another user. (flag +M)
 load "chanserv/op";              # OP: Allow one to op (him/her)self or another user. (flag +o)
 #load "chanserv/owner";          # OWNER: Allow one to owner (him/her)self or another user. (flag +q)
 #load "chanserv/protect";        # PROTECT: Allow one to protect (him/her)self or another user. (flag +a)
@@ -44,7 +44,7 @@ load "nickserv/info";             # INFO: View information about a nickname.
 load "nickserv/logout";           # LOGOUT: Log out of services.
 load "nickserv/register";         # REGISTER: Registers a nickname with NickServ, protecting it and unlocking various features for the user.
 load "nickserv/set";              # SET: Set core settings on an account.
-load "nickserv/resetpass";	  # RESETPASS: Allows an oper with nickserv:manage to reset a users password.
+load "nickserv/resetpass";        # RESETPASS: Allows an oper with nickserv:manage to reset a users password.
 
 # OperServ - Oper services.
 load "operserv/global";           # GLOBAL: Send a global notice to all connected users.
@@ -59,4 +59,4 @@ load "operserv/shutdown";         # SHUTDOWN: Save services data to disk and shu
 load "operserv/update";           # UPDATE: Save services data to disk.
 load "operserv/uptime";           # UPTIME: Display services uptime.
 load "operserv/version";          # VERSION: Display the version of services.
-load "operserv/stats";		  # STATS: Displays basic stats on registered accounts/channels
+load "operserv/stats";            # STATS: Displays basic stats on registered accounts/channels
