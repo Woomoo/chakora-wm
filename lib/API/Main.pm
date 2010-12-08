@@ -121,16 +121,4 @@ sub delete_cmdtree {
     delete $Chakora::CMDTREE{$service};
 }
 
-sub timer_add {
-    my ( $name, $ttime, $handler ) = @_;
-    $Chakora::TIMER{ lc($name) }{name}    = $name;
-    $Chakora::TIMER{ lc($name) }{ttime}   = $ttime;
-    $Chakora::TIMER{ lc($name) }{handler} = $handler;
-}
-
-sub timer_del {
-    my ($name) = @_;
-    delete $Chakora::TIMER{ lc($name) };
-}
-
 1;
