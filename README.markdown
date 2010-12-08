@@ -29,17 +29,17 @@ You should have the following before contacting us on this:
 
 As of this release, the chakora-wm development team consists of:
 
-alyx, Alexandria Wolcott <alyx@woomoo.org>
-JStoker, JStoker <jcs@jcs.me.uk>
-MattB, Matthew Barksdale <matthew@itsjustirc.org>
+	alyx, Alexandria Wolcott <alyx@woomoo.org>
+	JStoker, JStoker <jcs@jcs.me.uk>
+	MattB, Matthew Barksdale <matthew@itsjustirc.org>
 
 The developers of this software acknowledge the contributions of the following
 people:
 
-starcoder, Elijah Perrault
-MattB, Matthew Barksdale <matthew@itsjustirc.org>
-Dark_Aaron, Aaron Blakely
-sycobuny, Stephen Belcher <sycobuny@malkier.net>
+	starcoder, Elijah Perrault
+	MattB, Matthew Barksdale <matthew@itsjustirc.org>
+	Dark_Aaron, Aaron Blakely
+	sycobuny, Stephen Belcher <sycobuny@malkier.net>
 
 If you are interested in becoming a developer for Chakora,
 please contact a member of the Woomoo Development team
