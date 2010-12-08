@@ -57,16 +57,16 @@ Returns a new B<Chakora::Service> or dies on error.
 sub new {
 	my $class = shift;
 	my $self  = bless { @_ }, $class;
-	if (!$self->{nick}) {
+	if (!defined($self->{nick})) {
 		croak("Error: Please define a nick\n");
 	}
-	elsif (!$self->{ident}) {
+	elsif (!defined$self->{ident})) {
 		croak("Error: Please define an ident\n");
 	}
-	elsif (!$self->{mask}) {
+	elsif (!defined($self->{mask})) {
 		croak("Error: Please define a mask\n");
 	}
-	elsif (!$self->{realname}) {
+	elsif (!defined($self->{realname})) {
 		croak("Error: Please define a realname\n");
 	}
 	return $self;
