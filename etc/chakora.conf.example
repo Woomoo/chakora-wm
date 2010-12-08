@@ -29,7 +29,7 @@
         'changets' : 1,
         'fantasy' : 1,
         'allow_taint' : 0,
-	'recontime' : 5
+        'recontime' : 5
     },
 
     'crypto' : {
