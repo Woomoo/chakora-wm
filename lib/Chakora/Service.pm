@@ -35,7 +35,7 @@ use Chakora qw(snd);
 use Chakora::Protocol qw(client_create client_delete cjoin cpart);
 
 our $VERSION = '0.01';
-our %svshash;
+our (%svshash,$uid);
 
 =pod
 
@@ -93,8 +93,23 @@ This method connects the created client.
 
 sub init {
 	my $self = shift;
-	Chakora::Protocol->client_create(%svshash);
+	$self->{uid} = Chakora::Protocol->client_create(%svshash);
 	return 1;
+}
+
+1;
+
+=pod
+
+=head2 uid
+
+This method returns the created client's UID
+
+=cut
+
+sub uid {
+	my $self = shift;
+	return $self->{uid};
 }
 
 1;
