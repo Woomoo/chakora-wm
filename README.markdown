@@ -36,9 +36,9 @@ MattB, Matthew Barksdale <matthew@itsjustirc.org>
 The developers of this software acknowledge the contributions of the following
 people:
 
-starcoder, Elijah Perrault <?@?>
-MattB, Matthew Barksdale <?@?>
-Dark_Aaron, Aaron Blakely <?@?>
+starcoder, Elijah Perrault
+MattB, Matthew Barksdale <matthew@itsjustirc.org>
+Dark_Aaron, Aaron Blakely
 sycobuny, Stephen Belcher <sycobuny@malkier.net>
 
 If you are interested in becoming a developer for Chakora,
