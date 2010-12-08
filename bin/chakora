@@ -390,7 +390,7 @@ while (1) {
     unless ( defined($data) ) {
 
         # There is no connection! Lets reconnect!
-        sleep 2;
+        sleep config('general/recontime');
         $synced = 0;
         $socket = IO::Socket::INET->new(
             Proto     => "tcp",
