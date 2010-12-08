@@ -47,15 +47,15 @@ please contact a member of the Woomoo Development team
 
 Concepts based heavily upon the following:
 
-Atheme, http://atheme.net
-Shrike, http://shrike.malkier.net
-cerberus, www unknown
-keldair, http://keldair.woomoo.org
+* Atheme, http://atheme.net
+* Shrike, http://shrike.malkier.net
+* cerberus, www unknown
+* keldair, http://keldair.woomoo.org
 
 Code borrowed from:
 
-keldair, http://keldair.woomoo.org
-cerberus, www unknown
+* keldair, http://keldair.woomoo.org
+* cerberus, www unknown
 
 2. DESCRIPTION
 --------------
