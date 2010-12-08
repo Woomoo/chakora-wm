@@ -12,6 +12,9 @@ TABLE OF CONTENTS
 0. ATTENTION
 ------------
 
+/!\ NOTE: You really shouldn't use this. Use Atheme <http://atheme.net> /!\
+        /!\ or Shrike <http://shrike.malkier.net> instead. /!\
+
 As Chakora continues to progress in its development, we are
 beginning to need more help, so, if you'd like to help us out,
 please consider becoming a contributor/developer.
@@ -38,7 +41,12 @@ people:
 starcoder, Elijah Perrault <?@?>
 MattB, Matthew Barksdale <?@?>
 Dark_Aaron, Aaron Blakely <?@?>
+
+The developers of this software give a special thank you to:
+
 sycobuny, Stephen Belcher <sycobuny@malkier.net>
+
+for his extremely large contributions in code additions (See also: GStage)
 
 If you are interested in becoming a developer for Chakora,
 please contact a member of the Woomoo Development team
