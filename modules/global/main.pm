@@ -8,7 +8,6 @@ use warnings;
 module_init("global/main", "The Chakora Project", "0.3", \&init_g_main, \&void_g_main);
 
 sub init_g_main {
-	create_cmdtree("global");
 	hook_kill_add(\&ircd_g_kill);
 	hook_kick_add(\&ircd_g_kick);
 	if (!$Chakora::synced) { hook_pds_add(\&ircd_g_main); }
@@ -24,7 +23,6 @@ sub void_g_main {
 	serv_del('Global');
 	hook_kill_del(\&ircd_g_kill);
 	hook_kick_del(\&ircd_g_kick);
-	delete_cmdtree("global");
 	delete_sub 'void_g_main';
 }
 
