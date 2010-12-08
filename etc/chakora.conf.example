@@ -3,14 +3,14 @@
     'chakora' : {
         'host' : 'chakora.int',
         'name' : 'Chakora IRC Services',
-        'sid' : '00A',
+        'sid' : '01C',
         'admin' : 'misconfigured admin',
         'email' : 'misconfigured@admin,tld',
         'vhost' : '0.0.0.0'
     },
 
     'uplink' : {
-        'protocol' : 'inspircd12',
+        'protocol' : 'charybdis',
         'host' : 'localhost.localdomain',
         'port' : 7000,
         'password' : 'linkage'
