@@ -31,8 +31,11 @@ use strict;
 use warnings;
 use diagnostics -verbose;
 use Carp qw(cluck croak);
+use Chakora qw(snd);
+use Chakora::Protocol qw(client_create client_delete cjoin cpart);
 
 our $VERSION = '0.01';
+our %svshash;
 
 =pod
 
@@ -60,7 +63,7 @@ sub new {
 	if (!defined($self->{nick})) {
 		croak("Error: Please define a nick\n");
 	}
-	elsif (!defined$self->{ident})) {
+	elsif (!defined($self->{ident})) {
 		croak("Error: Please define an ident\n");
 	}
 	elsif (!defined($self->{mask})) {
@@ -68,6 +71,14 @@ sub new {
 	}
 	elsif (!defined($self->{realname})) {
 		croak("Error: Please define a realname\n");
+	}
+	else {
+		%svshash = (
+			nick => $self->{nick},
+			ident => $self->{ident},
+			mask => $self->{mask},
+			realname => $self->{realname},
+		);
 	}
 	return $self;
 }
@@ -82,9 +93,7 @@ This method connects the created client.
 
 sub init {
 	my $self = shift;
-
-	# Connect client here
-
+	Chakora::Protocol->client_create(%svshash);
 	return 1;
 }
 
