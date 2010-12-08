@@ -54,6 +54,7 @@ Concepts based heavily upon the following:
 
 Code borrowed from:
 
+* GStage, http://github.com/sycobuny/gstage
 * keldair, http://keldair.woomoo.org
 * cerberus, www unknown
 
