@@ -85,7 +85,7 @@ $SIG{'TERM'} = \&Chakora::Core::SIG::TERM_handler;
 # Create some variables for later use
 our (
     %rawcmds, %svsuid, %svsnick, %PROTO_SETTINGS, %COMMANDS,
-    %HELP,    %MODULE, %CMDTREE, %TIMER,          %FANTASY
+    %HELP,    %MODULE, %CMDTREE,          %FANTASY
 );
 
 # Load the modules
@@ -478,15 +478,6 @@ while (1) {
             # Error without a source
             elsif ( $ex[0] eq 'ERROR' ) {
                 raw_nosrcerror($data);
-            }
-        }
-
-        # Handle timers
-        foreach my $key ( keys %TIMER ) {
-            if ( $TIMER{$key}{ttime} eq time() ) {
-                my $tsub_ref = $TIMER{$key}{handler};
-                eval( $tsub_ref . ";" );
-                timer_del($key);
             }
         }
 
