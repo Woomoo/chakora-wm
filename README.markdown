@@ -1,5 +1,5 @@
-			Chakora-wm: A leet Chakora fork
-=============================================================================
+Chakora-wm: A leet Chakora fork
+==================================
 
 
 TABLE OF CONTENTS
