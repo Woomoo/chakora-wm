@@ -3,7 +3,9 @@
         "operators" : {
             "alyx" : "sra",
             "MattB" : "sra",
-            "JStoker" : "oper"
+            "JStoker" : "admin",
+	    "Cody"  : "oper",
+ 	    
         },
         "sra" : {
             "opersvs" : [ 'global', 'update', 'override' ],
