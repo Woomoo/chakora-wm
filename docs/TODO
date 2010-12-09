@@ -143,6 +143,7 @@
     [X] InspIRCd: Handle remote servers trying to set a users accountname like Charybdis
     [ ] Add handling for ADDLINE (InspIRCd) and BAN (Charybdis)
     [ ] When a service is unloaded, unload all modules that are associated with it
+    [ ] Fuck Email::Valid, all we need is decent regex... not a module.
 
 [ ] Docs
     [X] Add docs for the module api
