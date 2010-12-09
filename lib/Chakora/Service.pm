@@ -114,6 +114,76 @@ sub uid {
 
 =pod
 
+=head2 nick
+
+This method returns the service's nick.
+
+=cut
+
+sub nick {
+        my $self = shift;
+	return $self->{nick};
+}
+
+=pod
+
+=head2 ident
+
+This method returns the service's ident.
+
+=cut
+
+sub ident {
+        my $self = shift;
+        return $self->{ident};
+}
+
+=pod
+
+=head2 mask
+
+This method returns the service's mask.
+
+=cut
+
+sub mask {
+        my $self = shift;
+        return $self->{mask};
+}
+
+=pod
+
+=head2 realname
+
+This method returns the service's real name.
+
+=cut
+
+sub realname {
+        my $self = shift;
+        return $self->{realname};
+}
+
+=pod
+
+=head2 operonly
+
+This method returns if the service is set to oper only or not.
+
+=cut
+
+sub operonly {
+        my $self = shift;
+        if ($self->{operonly}) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+=pod
+
 =head2 join
 
 This method makes the created service join a channel
@@ -125,6 +195,7 @@ sub join {
 	Chakora::Protocol->cjoin($self->uid, $chan);
 	return 1;
 }
+
 
 =pod
 
