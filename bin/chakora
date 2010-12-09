@@ -44,6 +44,8 @@ my (%options);
 our ( $SERVICES_STARTTIME, $SERVICES_VERSION, $DEVS, $pid, $DB_VERSION, $rootetc, $SETTINGS, $socket, $ROOT_SRC );
 our $IN_DEBUG = 0;
 
+$DEVS = 'Matthew, Alyx, JStoker, Cody and miniCruizer';
+
 # Get command line options
 foreach my $key (@ARGV) {
 	if (lc($key) eq 'd' or $key =~ m/debug/i) {
