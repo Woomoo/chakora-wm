@@ -19,7 +19,6 @@ use lib("$Bin/../lib");
 use IO::Socket;
 # Mostly human-readable JSON config format parser
 use Config::JSON;
-use Getopt::Long;
 # POSIX features
 use POSIX qw(setsid nice BUFSIZ setsid strftime);
 # Extended Input/Output 'file' handle support
@@ -27,7 +26,7 @@ use IO::Handle;
 # System select() event interface
 use IO::Select;
 # What is this used for...
-use Sub::Delete;
+#use Sub::Delete;
 # See above message. I'm guessing it's time for a major rework
 # of unloading modules.
 # Used to generate hashed passwords
@@ -42,14 +41,21 @@ our $VERSION = 'chakora-1.0.0+wm';
 our $root = "$Bin/..";
 
 my (%options);
-our ( $SERVICES_STARTTIME, $SERVICES_VERSION, $DEVS, $pid, $DB_VERSION );
+our ( $SERVICES_STARTTIME, $SERVICES_VERSION, $DEVS, $pid, $DB_VERSION, $rootetc, $SETTINGS, $socket, $ROOT_SRC );
 our $IN_DEBUG = 0;
 
 # Get command line options
-GetOptions(
-    'help'  => \$options{help},
-    'debug' => \$options{debug},
-);
+foreach my $key (@ARGV) {
+	if (lc($key) eq 'd' or $key =~ m/debug/i) {
+		$options{debug} = 1;
+	}
+	if (lc($key) eq 'h' or $key =~ m/help/i) {
+		$options{help} = 1;
+	}
+	else {
+		print "Unknown argument recieved (".$key.")\n";
+	}
+}
 
 # Handle --help
 if ( $options{help} ) {
@@ -59,7 +65,7 @@ if ( $options{help} ) {
     exit;
 }
 
-printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ))
+printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ));
 
 sleep 1;
 our $TAINTED = 0;

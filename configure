@@ -20,19 +20,12 @@ eval {
     1;
 } or print("Not Found (install IO::Socket)\n") and $die = 1;
 
-print("Checking for Config::Scoped..... ");
+print("Checking for Config::JSON..... ");
 eval {
-    require Config::Scoped;
+    require Config::JSON;
     print "OK\n";
     1;
-} or print("Not Found (install Config::Scoped)\n") and $die = 1;
-
-print("Checking for Getopt::Long..... ");
-eval {
-    require Getopt::Long;
-    print "OK\n";
-    1;
-} or print("Not Found (install Getopt::Long)\n") and $die = 1;
+} or print("Not Found (install Config::JSON)\n") and $die = 1;
 
 print("Checking for FindBin..... ");
 eval {
