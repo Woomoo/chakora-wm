@@ -268,12 +268,12 @@ close FILE;
 # Open the socket and connect to the server
 our $sock = IO::Socket::INET->new(
     Proto     => "tcp",
-    LocalAddr => config( 'server', 'vhost' ),
-    PeerAddr  => config( 'server', 'host' ),
-    PeerPort  => config( 'server', 'port' ),
+    LocalAddr => config( 'uplink/vhost' ),
+    PeerAddr  => config( 'uplink/host' ),
+    PeerPort  => config( 'uplink/port' ),
   )
   or error( "chakora",
-    "Connection to " . config( 'server', 'host' ) . " failed.\n" );
+    "Connection to " . config('uplink/host') . " failed.\n" );
 
 # Create some variables for later use
 my ( $data, $ex, @ex, $mtext );
@@ -323,12 +323,12 @@ while (1) {
         $synced = 0;
         $socket = IO::Socket::INET->new(
             Proto     => "tcp",
-            LocalAddr => config( 'server', 'vhost' ),
-            PeerAddr  => config( 'server', 'host' ),
-            PeerPort  => config( 'server', 'port' ),
+            LocalAddr => config( 'uplink/vhost' ),
+            PeerAddr  => config( 'uplink/host' ),
+            PeerPort  => config( 'uplink/port' ),
           )
           or error( "chakora",
-            "Connection to " . config( 'server', 'host' ) . " failed.\n" );
+            "Connection to " . config( 'uplink/host' ) . " failed.\n" );
         irc_connect();
     }
     if ( defined $data ) {
@@ -352,8 +352,8 @@ while (1) {
 
             # Charybdis/Ratbox: syncing done
             if ( $ex[0] eq 'PING' and $synced != 1 ) {
-                if (   lc( config( 'server', 'ircd' ) ) eq 'charybdis'
-                    or lc( config( 'server', 'ircd' ) ) eq 'ratbox' )
+                if (   lc($protocol) eq 'charybdis'
+                    or lc($protocol) eq 'ratbox' )
                 {
                     raw_endsync();
                 }
@@ -361,8 +361,8 @@ while (1) {
 
             # Charybdis/Ratbox: Handle the SERVER while linking
             elsif ( $ex[0] eq 'SERVER' and $synced != 1 ) {
-                if (   lc( config( 'server', 'ircd' ) ) eq 'charybdis'
-                    or lc( config( 'server', 'ircd' ) ) eq 'ratbox' )
+                if (   lc($protocol) eq 'charybdis'
+                    or lc($protocol) eq 'ratbox' )
                 {
                     raw_server($data);
                 }
@@ -370,8 +370,8 @@ while (1) {
 
             # Charybdis/Ratbox: Handle the PASS while linking
             elsif ( $ex[0] eq 'PASS' and $synced != 1 ) {
-                if (   lc( config( 'server', 'ircd' ) ) eq 'charybdis'
-                    or lc( config( 'server', 'ircd' ) ) eq 'ratbox' )
+                if (   lc($protocol) eq 'charybdis'
+                    or lc( config($protocol) ) eq 'ratbox' )
                 {
                     raw_pass($data);
                 }
@@ -380,25 +380,25 @@ while (1) {
             # InspIRCd: Handle the SERVER while linking
             elsif ( $ex[0] eq 'SERVER'
                 and $synced != 1
-                and lc( config( 'server', 'ircd' ) ) eq 'inspircd12' )
+                and lc($protocol) eq 'inspircd12' )
             {
                 raw_lserver($data);
             }
 
             # Charybdis/Ratbox: Respond to PING's
             elsif ( $ex[0] eq 'PING' and $synced != 0 ) {
-                if (   lc( config( 'server', 'ircd' ) ) eq 'charybdis'
-                    or lc( config( 'server', 'ircd' ) ) eq 'ratbox' )
+                if (   lc($protocol) eq 'charybdis'
+                    or lc($protocol) eq 'ratbox' )
                 {
                     send_sock(
-                        ":" . config( 'me', 'sid' ) . " PONG " . $ex[1] );
+                        ":" . config( 'me/sid' ) . " PONG " . $ex[1] );
                 }
             }
 
             # Charybdis/Ratbox: Local SQUIT's
             elsif ( $ex[0] eq 'SQUIT' ) {
-                if (   lc( config( 'server', 'ircd' ) ) eq 'charybdis'
-                    or lc( config( 'server', 'ircd' ) ) eq 'ratbox' )
+                if (   lc($protocol) eq 'charybdis'
+                    or lc($protocol) eq 'ratbox' )
                 {
                     raw_lsquit($data);
                 }
@@ -574,7 +574,7 @@ sub is_tainted {
 sub taint {
     my ($str) = @_;
     my $msg = "TAINTED: " . $str;
-    if ( config( 'services', 'allow_taint' ) ) {
+    if ( config( 'services/allow_taint' ) ) {
         $msg .= " - ALLOW_TAINT enabled, ignoring taint. . .";
         if ($IN_DEBUG) {
             print( "[WARNING] " . $msg . "\n" );
@@ -588,7 +588,7 @@ sub taint {
             if ( module_exists("chanserv/main") ) {
                 serv_quit( "chanserv", "Shutting down" );
             }
-            serv_squit( config( 'me', 'sid' ), "Tainted" );
+            serv_squit( config( 'me/sid' ), "Tainted" );
         }
 
         error( "chakora", $msg );
