@@ -5,7 +5,7 @@
         'name' : 'Chakora IRC Services',
         'sid' : '01C',
         'admin' : 'misconfigured admin',
-        'email' : 'misconfigured@admin,tld',
+        'email' : 'misconfigured@admin.tld',
         'vhost' : '0.0.0.0'
     },
 
