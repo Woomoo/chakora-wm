@@ -3,7 +3,7 @@ package Chakora::Protocol;
 use strict;
 use warnings;
 use Carp qw(croak cluck);
-use Chakora qw(snd);
+use Chakora qw(snd config);
 
 
 our %PROTOINFO = (
@@ -27,6 +27,15 @@ sub link {
 
 sub create_client {
 	my (%client) = shift;
+	my $id;
+	
+	if ($PROTOINFO{uses_sids)) {
+		$id = config('link/sid');
+	}
+	
+	else {
+		$id = config('link/name');
+	}
 	
 	# verify all required fields are provided.
 	# make uid
