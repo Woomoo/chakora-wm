@@ -31,8 +31,8 @@ use strict;
 use warnings;
 use diagnostics -verbose;
 use Carp qw(cluck croak);
-use Chakora qw(snd);
-use Chakora::Protocol qw(client_create client_delete cjoin cpart);
+#use Chakora qw(snd);
+use Protocol qw(client_create client_delete cjoin cpart);
 
 our $VERSION = '0.01';
 our (%svshash,$uid);
@@ -112,7 +112,36 @@ sub uid {
 	return $self->{uid};
 }
 
-1;
+=pod
+
+=head2 join
+
+This method makes the created service join a channel
+
+=cut
+
+sub join {
+	my ($self, $chan) = shift, shift;
+	Chakora::Protocol->cjoin($self->uid, $chan);
+	return 1;
+}
+
+=pod
+
+=head2 part
+
+This method makes the created service part a channel
+
+=cut
+
+sub part {
+	my ($self, $chan, $reason) = shift, shift, shift;
+	if (length($reason) = 0) {
+		$reason = 'Parting...';
+	}
+	Chakora::Protocol->cpart($self->uid, $chan, $reason);
+	return 1;
+}
 
 =pod
 
@@ -120,8 +149,13 @@ sub uid {
 
 For support please connect to irc.woomoo.org #dev
 
-=head1 AUTHOR
-
-Copyright 2010 Chakora-wm developers
-
 =cut
+
+=head1 AUTHORS
+See README
+=cut
+
+=head1 COPYRIGHT
+Copyright 2010 Chakora-wm developers
+=cut
+
