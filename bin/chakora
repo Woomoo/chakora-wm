@@ -268,7 +268,7 @@ close FILE;
 # Open the socket and connect to the server
 our $sock = IO::Socket::INET->new(
     Proto     => "tcp",
-    LocalAddr => config( 'uplink/vhost' ),
+    LocalAddr => config( 'chakora/vhost' ),
     PeerAddr  => config( 'uplink/host' ),
     PeerPort  => config( 'uplink/port' ),
   )
@@ -323,7 +323,7 @@ while (1) {
         $synced = 0;
         $socket = IO::Socket::INET->new(
             Proto     => "tcp",
-            LocalAddr => config( 'uplink/vhost' ),
+            LocalAddr => config( 'chakora/vhost' ),
             PeerAddr  => config( 'uplink/host' ),
             PeerPort  => config( 'uplink/port' ),
           )
