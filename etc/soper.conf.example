@@ -4,9 +4,9 @@
             "alyx" : "sra",
             "MattB" : "sra",
             "JStoker" : "admin",
-	    "Cody"  : "oper",
- 	    
+    	    "Cody"  : "oper"   
         },
+
         "sra" : {
             "opersvs" : [ 'global', 'update', 'override' ],
             "chansvs" : [ 'override' ],
