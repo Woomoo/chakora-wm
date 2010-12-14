@@ -22,7 +22,7 @@ please consider becoming a contributor/developer.
 You should have the following before contacting us on this:
 
 * A fair knowledge of Perl.
-* Ability to use proper English, grammar, etc. to a good degree.
+* Ability to use proper English, grammar, etc. to a fair degree.
 * Knowedge the difference between "its" and "it's."
 * Incapability of being a bloody moron.
 
@@ -34,13 +34,14 @@ As of this release, the chakora-wm development team consists of:
 alyx, Alexandria Wolcott <alyx@woomoo.org>
 JStoker, JStoker <jcs@jcs.me.uk>
 MattB, Matthew Barksdale <matthew@itsjustirc.org>
+Cody, Cody Mitchell <cody@ephasic.org, cody@woomoo.org, cody@spunet.org, cody@tekcube.com>
 
 The developers of this software acknowledge the contributions of the following
 people:
 
 starcoder, Elijah Perrault <?@?>
 MattB, Matthew Barksdale <?@?>
-Dark_Aaron, Aaron Blakely <?@?>
+Dark_Aaron, Aaron Blakely <aaron@ephasic.org>
 
 The developers of this software give a special thank you to:
 
@@ -50,7 +51,7 @@ for his extremely large contributions in code additions (See also: GStage)
 
 If you are interested in becoming a developer for Chakora,
 please contact a member of the Woomoo Development team
-(irc.woomoo.org #dev ).
+(irc.woomoo.org #dev).
 
 Concepts based heavily upon the following:
 
