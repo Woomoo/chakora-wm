@@ -44,7 +44,7 @@ my (%options);
 our ( $SERVICES_STARTTIME, $SERVICES_VERSION, $DEVS, $pid, $DB_VERSION, $rootetc, $SETTINGS, $socket, $ROOT_SRC );
 our $IN_DEBUG = 0;
 
-$DEVS = 'Matthew, Alyx, JStoker, Cody and miniCruizer';
+$DEVS = 'Matthew, Alyx, JStoker, Cody and miniCruzer';
 
 # Get command line options
 foreach my $key (@ARGV) {
