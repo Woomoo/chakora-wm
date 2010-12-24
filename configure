@@ -1,81 +1,22 @@
 #!/usr/bin/env perl
-# Copyright (c) 2010 The Chakora Project. All rights reserved.
-# Released under The BSD License (docs/LICENSE - http://www.opensource.org/licenses/bsd-license.php)
-# This script was written by idiots. I will rewrite it later. --miniCruzer
+# Hooray! ./configure no longer looks like a monkey wrote it!
+# Copyright (c) 2010 Samuel Hoffman
 use strict;
 use warnings;
-
-print("Welcome to the Chakora Setup Wizard!\n");
-print("We recommend using this to make sure everything works\n");
-print("properly.\n\nChecking for required modules...\n");
-
-my ($die);
-
-print "Checking for IO::Socket..... ";
+print "Checking your Perl Installation: ";
 eval {
-    require IO::Socket;
-    print "OK\n";
-    1;
-} or print("Not Found (install IO::Socket)\n") and $die = 1;
+  require POSIX;
+  require IO::Socket;
+  1;
+  print "OK\n";
+} || die "Reinstall Perl, you're missing some core modules\n";
 
-print("Checking for Config::JSON..... ");
-eval {
-    require Config::JSON;
-    print "OK\n";
-    1;
-} or print("Not Found (install Config::JSON)\n") and $die = 1;
-
-print("Checking for FindBin..... ");
-eval {
-    require FindBin;
-    print "OK\n";
-    1;
-} or print("Not Found (install FindBin)\n") and $die = 1;
-
-print("Checking for Sub::Delete..... ");
-eval {
-    require Sub::Delete;
-    print "OK\n";
-    1;
-} or print("Not Found (install Sub::Delete)\n") and $die = 1;
-
-print("Checking for Digest::Whirlpool..... ");
-eval {
-    require Digest::Whirlpool;
-    print "OK\n";
-    1;
-} or print("Not Found (install Digest::Whirlpool)\n") and $die = 1;
-
-print("Checking for Digest::HMAC..... ");
-eval {
-    require Digest::HMAC;
-    print "OK\n";
-    1;
-} or print("Not Found (install Digest::HMAC)\n") and $die = 1;
-
-print("Checking for Email::Valid..... ");
-eval {
-    require Email::Valid;
-    print "OK\n";
-    1;
-} or print("Not Found (install Email::Valid)\n") and $die = 1;
-
-print("Checking for sendmail..... ");
-if (-e '/usr/sbin/sendmail') {
-	print "OK\n";
-	1;
-} else {
-	print("Not Found (Please install sendmail or create a symbolic link at /usr/sbin/sendmail)\n");
-	$die = 1;
-}
-
-print("\n");
-
-if ($die) {
-    die("Required modules missing! Please install these then try again!\n");
-}
-
-print(
-"All required modules were found.\nPlease edit etc/chakora.conf.example and rename it to chakora.conf now...\n\n"
-);
+my $path;
+print "Config::JSON: ".((eval { require Config::JSON; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "FindBin: ".((eval { require FindBin; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "Sub::Delete: ".((eval { require Sub::Delete; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "Digest::Whirlpool: ".((eval { require Digest::Whirlpool; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "Digest::HMAC: ".((eval { require Digest::HMAC; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "Email::Vaild: ".((eval { require Email::Valid; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "sendmail: ".((-e '/usr/sbin/sendmail') ? "OK" : "NOT FOUND")."\n";
 
