@@ -11,7 +11,6 @@ eval {
   print "OK\n";
 } || die "Reinstall Perl, you're missing some core modules\n";
 
-my $path;
 print "Config::JSON: ".((eval { require Config::JSON; 1; }) ? "OK" : "NOT FOUND")."\n";
 print "FindBin: ".((eval { require FindBin; 1; }) ? "OK" : "NOT FOUND")."\n";
 print "Sub::Delete: ".((eval { require Sub::Delete; 1; }) ? "OK" : "NOT FOUND")."\n";
