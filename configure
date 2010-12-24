@@ -3,6 +3,9 @@
 # Copyright (c) 2010 Samuel Hoffman
 use strict;
 use warnings;
+
+require 5.8.0 || die "Please upgrade Perl to at least 5.8.0 before using Chakora\n";
+
 print "Checking your Perl Installation: ";
 eval {
   require POSIX;
