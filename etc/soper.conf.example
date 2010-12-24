@@ -1,28 +1,29 @@
 {
-    "soper" : {
-        "operators" : {
-            "alyx" : "sra",
-            "MattB" : "sra",
-	    "Elizabeth" : "sra",
-            "JStoker" : "admin",
-    	    "Cody"  : "oper"   
-        },
+	"soper" : {
 
-        "sra" : {
-            "opersvs" : [ 'global', 'update', 'override' ],
-            "chansvs" : [ 'override' ],
-            "nicksvs" : [ 'override', 'manage' ],
-            "hostsvs" : [ 'override' ]
-        },
+			"operators" : {
+				"alyx" : "sra",
+				"MattB" : "sra",
+				"Elizabeth" : "sra",
+				"JStoker" : "admin",
+				"Cody"  : "oper"   
+			},
 
-        "admin" : {
-            "opersvs" : [ 'global', 'update', 'override' ],
-            "chansvs" : [ 'override' ],
-            "nicksvs" : [ 'override', 'manage' ],
-            "hostsvs" : [ 'override' ]
-        },
-        "oper" : {
-            "opersvs" : [ 'global', 'update' ],
-            "nicksvs" : [ 'manage' ]
-        }
-}
+			"sra" : {
+				"opersvs" : [ 'global', 'update', 'override' ],
+				"chansvs" : [ 'override' ],
+				"nicksvs" : [ 'override', 'manage' ],
+				"hostsvs" : [ 'override' ]
+			},
+
+			"admin" : {
+				"opersvs" : [ 'global', 'update', 'override' ],
+				"chansvs" : [ 'override' ],
+				"nicksvs" : [ 'override', 'manage' ],
+				"hostsvs" : [ 'override' ]
+			},
+			"oper" : {
+				"opersvs" : [ 'global', 'update' ],
+				"nicksvs" : [ 'manage' ]
+			}
+	}
