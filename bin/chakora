@@ -306,8 +306,6 @@ if ( -e "$ROOT_SRC/../etc/modules.conf" ) {
     }
 }
 
-sleep 1;
-
 # Connect!
 irc_connect();
 hook_ctcp_add( \&handle_ctcp );
