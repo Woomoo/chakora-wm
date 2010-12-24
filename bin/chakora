@@ -69,7 +69,6 @@ if ( $options{help} ) {
 
 printf("%s started on %s\n", $VERSION, strftime( '%D at %I:%M:%S %p.', localtime ));
 
-sleep 1;
 our $TAINTED = 0;
 svsflog( "chakora", "Chakora IRC Services started." );
 

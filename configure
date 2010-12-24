@@ -20,5 +20,6 @@ print "Sub::Delete: ".((eval { require Sub::Delete; 1; }) ? "OK" : "NOT FOUND").
 print "Digest::Whirlpool: ".((eval { require Digest::Whirlpool; 1; }) ? "OK" : "NOT FOUND")."\n";
 print "Digest::HMAC: ".((eval { require Digest::HMAC; 1; }) ? "OK" : "NOT FOUND")."\n";
 print "Email::Vaild: ".((eval { require Email::Valid; 1; }) ? "OK" : "NOT FOUND")."\n";
+print "IO::Select: ".((eval { require IO::Select; 1; }) ? "OK" : "Install IO::Select")."\n";
 print "sendmail: ".((-e '/usr/sbin/sendmail') ? "OK" : "NOT FOUND")."\n";
 
