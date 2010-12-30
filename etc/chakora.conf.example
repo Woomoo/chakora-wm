@@ -1,87 +1,87 @@
 # config-file-type: JSON 1
 {
-    'chakora' : {
-        'host' : 'chakora.int',
-        'name' : 'Chakora IRC Services',
-        'sid' : '01C',
-        'admin' : 'misconfigured admin',
-        'email' : 'misconfigured@admin.tld',
-        'vhost' : '0.0.0.0'
+    "chakora" : {
+        "host" : "chakora.int",
+        "name" : "Chakora IRC Services",
+        "sid" : "01C",
+        "admin" : "misconfigured admin",
+        "email" : "misconfigured@admin.tld",
+        "vhost" : "0.0.0.0"
     },
 
-    'uplink' : {
-        'protocol' : 'charybdis',
-        'host' : 'localhost.localdomain',
-        'port' : 7000,
-        'password' : 'linkage'
+    "uplink" : {
+        "protocol" : "charybdis",
+        "host" : "localhost.localdomain",
+        "port" : 7000,
+        "password" : "linkage"
     },
 
-    'network' : {
-        'name' : 'misconfiguredNET',
+    "network" : {
+        "name" : "misconfiguredNET",
     },
 
-    'logging' : {
-        'channel' : '#services',
-        'flags' : 'error soper request register'
+    "logging" : {
+        "channel" : "#services",
+        "flags" : "error soper request register"
     },
 
-    'general' : {
-        'changets' : 0,
-        'fantasy' : 1,
-        'allow_taint' : 0,
-        'recontime' : 5
+    "general" : {
+        "changets" : 0,
+        "fantasy" : 1,
+        "allow_taint" : 0,
+        "recontime" : 5
     },
 
-    'crypto' : {
-        'method' : 'skein',
-        'size' : 1024,
-        #'key' : 'misconfigured'
+    "crypto" : {
+        "method" : "skein",
+        "size" : 1024,
+        #"key" : "misconfigured"
     },
 
-    'services' : {
-        'chanserv' : {
-            'nick' : 'ChanServ',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Channel Services',
-            'fantasy' : '!'
+    "services" : {
+        "chanserv" : {
+            "nick" : "ChanServ",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Channel Services",
+            "fantasy" : "!"
         },
 
-        'nickserv' : {
-            'nick' : 'NickServ',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Nickname Services',
+        "nickserv" : {
+            "nick" : "NickServ",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Nickname Services",
 
-            'spam' : 0
+            "spam" : 0
         },
 
-        'operserv' : {
-            'nick' : 'OperServ',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Operator Services'
+        "operserv" : {
+            "nick" : "OperServ",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Operator Services"
         },
 
-        'hostserv' : {
-            'nick' : 'HostServ',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Host Management Services'
+        "hostserv" : {
+            "nick" : "HostServ",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Host Management Services"
         },
 
-        'memoserv' : {
-            'nick' : 'MemoServ',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Memo Services'
+        "memoserv" : {
+            "nick" : "MemoServ",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Memo Services"
         },
 
-        'global' : {
-            'nick' : 'Global',
-            'user' : 'services',
-            'host' : 'services.int',
-            'real' : 'Global Noticer'
+        "global" : {
+            "nick" : "Global",
+            "user" : "services",
+            "host" : "services.int",
+            "real" : "Global Noticer"
         }
     }
 }
