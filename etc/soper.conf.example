@@ -10,20 +10,20 @@
 			},
 
 			"sra" : {
-				"opersvs" : [ 'global', 'update', 'override' ],
-				"chansvs" : [ 'override' ],
-				"nicksvs" : [ 'override', 'manage' ],
-				"hostsvs" : [ 'override' ]
+				"opersvs" : [ "global", "update", "override" ],
+				"chansvs" : [ "override" ],
+				"nicksvs" : [ "override", "manage" ],
+				"hostsvs" : [ "override" ]
 			},
 
 			"admin" : {
-				"opersvs" : [ 'global', 'update', 'override' ],
-				"chansvs" : [ 'override' ],
-				"nicksvs" : [ 'override', 'manage' ],
-				"hostsvs" : [ 'override' ]
+				"opersvs" : [ "global", "update", "override" ],
+				"chansvs" : [ "override" ],
+				"nicksvs" : [ "override", "manage" ],
+				"hostsvs" : [ "override" ]
 			},
 			"oper" : {
-				"opersvs" : [ 'global', 'update' ],
-				"nicksvs" : [ 'manage' ]
+				"opersvs" : [ "global", "update" ],
+				"nicksvs" : [ "manage" ]
 			}
 	}
